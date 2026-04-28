@@ -1,24 +1,43 @@
 from datetime import date
-from pydantic import BaseModel
+from pydantic import BaseModel, TypeAdapter, RootModel
 
 
-class DynamicsFiltersRequest(BaseModel):
+class TradingResultSchema(BaseModel):
+    exchange_product_id: str
+    date: "date"
+    exchange_product_name: str
     oil_id: str
-    delivery_type_id: str
     delivery_basis_id: str
-    start_date: date
-    end_date: date
-
-
-class TradingFiltersRequest(BaseModel):
-    oil_id: str
+    delivery_basis_name: str
     delivery_type_id: str
-    delivery_basis_id: str
+    volume: int
+    total: int
+    count: int
+
+    class Config:
+        from_attributes = True
 
 
-class LastDatesResponse(BaseModel):
-    dates: list
+trading_result_list_adapter = TypeAdapter(list[TradingResultSchema])
 
 
-class TradingResultsResponse(BaseModel):
-    tradings: list
+class DynamicsFilters(BaseModel):
+    oil_id: str | None = None
+    delivery_type_id: str | None = None
+    delivery_basis_id: str | None = None
+    start_date: date = date.fromisoformat("2026-04-20")  # TODO Удалить
+    end_date: date = date.fromisoformat("2026-04-28")  # TODO Удалить
+
+
+class TradingFilters(BaseModel):
+    oil_id: str | None = None
+    delivery_type_id: str | None = None
+    delivery_basis_id: str | None = None
+
+
+class LastDatesResponse(RootModel):
+    root: list[date]
+
+
+class TradingResultsResponse(RootModel):
+    root: list[TradingResultSchema]

@@ -5,8 +5,8 @@ from sqlalchemy.orm.session import sessionmaker
 from src.core.settings import settings
 
 
-sqlalchemy_database_uri = settings.DB_URI
-async_engine = create_async_engine(sqlalchemy_database_uri, pool_pre_ping=True)
+sqlalchemy_database_url = settings.db.url
+async_engine = create_async_engine(sqlalchemy_database_url, pool_pre_ping=True)
 async_session = sessionmaker(async_engine, expire_on_commit=False, class_=AsyncSession)
 
 

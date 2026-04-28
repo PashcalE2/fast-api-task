@@ -16,7 +16,9 @@ app.include_router(router)
 
 
 def handle_default_error(
-    exc: Exception, status_code: int, headers: dict | None = None
+    exc: Exception,
+    status_code: int,
+    headers: dict | None = None,
 ) -> JSONResponse:
     return JSONResponse(
         status_code=status_code, content={"detail": str(exc)}, headers=headers
