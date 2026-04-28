@@ -1,8 +1,8 @@
 from datetime import date
-from pydantic import BaseModel, TypeAdapter, RootModel
+from pydantic import BaseModel, RootModel
 
 
-class TradingResultSchema(BaseModel):
+class TradingResultsSchema(BaseModel):
     exchange_product_id: str
     date: "date"
     exchange_product_name: str
@@ -18,26 +18,23 @@ class TradingResultSchema(BaseModel):
         from_attributes = True
 
 
-trading_result_list_adapter = TypeAdapter(list[TradingResultSchema])
-
-
-class DynamicsFilters(BaseModel):
+class DynamicsFiltersSchema(BaseModel):
     oil_id: str | None = None
     delivery_type_id: str | None = None
     delivery_basis_id: str | None = None
-    start_date: date = date.fromisoformat("2026-04-20")  # TODO Удалить
-    end_date: date = date.fromisoformat("2026-04-28")  # TODO Удалить
+    start_date: date = date.fromisoformat("2026-04-20")
+    end_date: date = date.fromisoformat("2026-04-28")
 
 
-class TradingFilters(BaseModel):
+class TradingFiltersSchema(BaseModel):
     oil_id: str | None = None
     delivery_type_id: str | None = None
     delivery_basis_id: str | None = None
 
 
-class LastDatesResponse(RootModel):
+class LastDatesSchema(RootModel):
     root: list[date]
 
 
-class TradingResultsResponse(RootModel):
-    root: list[TradingResultSchema]
+class TradingResultsSchema(RootModel):
+    root: list[TradingResultsSchema]

@@ -16,7 +16,7 @@ class CreatedUpdated(Base):
     )
 
 
-class SpimexTradingResults(CreatedUpdated):
+class SpimexTradingResultsModel(CreatedUpdated):
     """
     Из таблицы "Единица измерения: Метрическая тонна", где количество Договоров, шт. > 0
 

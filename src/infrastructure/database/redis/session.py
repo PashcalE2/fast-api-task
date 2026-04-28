@@ -2,7 +2,7 @@ from logging import getLogger
 from typing import AsyncGenerator
 from redis.asyncio import Redis, ConnectionPool
 
-from src.core.settings import settings
+from src.infrastructure.config.settings import settings
 
 
 logger = getLogger(__name__)
@@ -19,4 +19,4 @@ async def async_get_redis_client() -> AsyncGenerator[Redis]:
     redis_client = Redis(connection_pool=pool)
     yield redis_client
     logger.info("Closing Redis client")
-    await redis_client.close()
+    await redis_client.aclose()

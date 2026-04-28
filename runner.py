@@ -1,7 +1,7 @@
 import uvicorn
 
-from src.core import logger
-from src.core.settings import settings
+from src.infrastructure.config import logger
+from src.infrastructure.config.settings import settings
 
 
 if __name__ == "__main__":
