@@ -22,8 +22,8 @@ class DynamicsFiltersSchema(BaseModel):
     oil_id: str | None = None
     delivery_type_id: str | None = None
     delivery_basis_id: str | None = None
-    start_date: date = date.fromisoformat("2026-04-20")
-    end_date: date = date.fromisoformat("2026-04-28")
+    start_date: date
+    end_date: date
 
     @model_validator(mode="after")
     def check_dates(self):
