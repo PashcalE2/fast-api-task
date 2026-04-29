@@ -1,4 +1,4 @@
-from dataclasses import asdict, is_dataclass
+from dataclasses import asdict
 from json import dumps as json_dumps
 
 from src.core.domain.trading import SpimexTradingResults

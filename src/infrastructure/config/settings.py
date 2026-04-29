@@ -1,3 +1,4 @@
+from datetime import time
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import computed_field, PostgresDsn
 
@@ -44,6 +45,7 @@ class RedisSettings(BaseSettings):
 
     host: str
     port: int
+    expiration_at: time
     max_connections: int = 10
     decode_responses: bool = True
 
