@@ -13,4 +13,7 @@ def get_expiration_time() -> int:
     if now > target:
         target += timedelta(days=1)
 
-    return int(target.timestamp())
+    seconds = int(target.timestamp() - now.timestamp())
+    if seconds == 0:
+        return 1
+    return seconds
