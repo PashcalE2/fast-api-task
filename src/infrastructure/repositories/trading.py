@@ -52,7 +52,7 @@ class TradingPostgresRepository(TradingRepository):
         data = [d.isoformat() for d in data]
         data = json_dumps(data)
         await self.redis_client.setex(
-            key=key,
+            name=key,
             time=get_expiration_time(),
             value=data,
         )
@@ -102,7 +102,7 @@ class TradingPostgresRepository(TradingRepository):
         logger.info("Saving data to redis")
         data = mapper.dataclass_list_to_json(data)
         await self.redis_client.setex(
-            key=key,
+            name=key,
             time=get_expiration_time(),
             value=data,
         )
@@ -150,7 +150,7 @@ class TradingPostgresRepository(TradingRepository):
         logger.info("Saving data to redis")
         data = mapper.dataclass_list_to_json(data)
         await self.redis_client.setex(
-            key=key,
+            name=key,
             time=get_expiration_time(),
             value=data,
         )

@@ -1,5 +1,5 @@
 from datetime import date
-from pydantic import BaseModel, RootModel
+from pydantic import BaseModel, RootModel, model_validator
 
 
 class TradingResultsSchema(BaseModel):
@@ -24,6 +24,12 @@ class DynamicsFiltersSchema(BaseModel):
     delivery_basis_id: str | None = None
     start_date: date = date.fromisoformat("2026-04-20")
     end_date: date = date.fromisoformat("2026-04-28")
+
+    @model_validator(mode="after")
+    def check_dates(self):
+        if self.end_date < self.start_date:
+            raise ValueError("end_date must be >= start_date")
+        return self
 
 
 class TradingFiltersSchema(BaseModel):

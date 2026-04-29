@@ -30,7 +30,7 @@ async def get_last_trading_dates(
 @router.get(path="/dynamics")
 async def get_dynamics(
     response: Response,
-    filters: DynamicsFiltersSchema = Depends(),
+    filters: DynamicsFiltersSchema = Query(),
     trading_service: TradingService = Depends(dependencies.get_trading_service),
 ) -> TradingResultsSchema:
     response.status_code = status.HTTP_200_OK
@@ -42,7 +42,7 @@ async def get_dynamics(
 @router.get(path="/results")
 async def get_trading_results(
     response: Response,
-    filters: TradingFiltersSchema = Depends(),
+    filters: TradingFiltersSchema = Query(),
     trading_service: TradingService = Depends(dependencies.get_trading_service),
 ) -> TradingResultsSchema:
     response.status_code = status.HTTP_200_OK
